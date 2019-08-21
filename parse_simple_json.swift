@@ -2,9 +2,9 @@
 
 import Foundation
 
-# update the path to point to the approprite file
-# change dictionary["Client-ID"] for the appropriate top level key
-# more good examples https://developer.apple.com/swift/blog/?id=37
+// update the path to point to the approprite file
+// change dictionary["Client-ID"] for the appropriate top level key
+// more good examples https://developer.apple.com/swift/blog/?id=37
 
 let path = "/path/to/test.json"
 let fileURL = URL(fileURLWithPath: path)
