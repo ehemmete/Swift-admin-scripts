@@ -2,6 +2,8 @@
 import Foundation
 import OpenDirectory
 
+var stUsers: [String] = []
+
 let command = Process()
 let output = Pipe()
 
@@ -22,7 +24,7 @@ let guids: [String] = matchingArray.map { $0["APFSCryptoUserUUID"]! }
 for guid in guids {
 	do{
 		if guid == "FFFFEEEE-DDDD-CCCC-BBBB-AAAA000000C9" {
-			print("Local Open Directory macOS Guest User")
+            stUsers.append("Local Open Directory macOS Guest User")
 		} else {
 			let query = try ODQuery(node: ODNode(session: ODSession.default(), type: ODNodeType(kODNodeTypeLocalNodes)),
 								forRecordTypes: kODRecordTypeUsers,
@@ -32,9 +34,11 @@ for guid in guids {
 								returnAttributes: kODAttributeTypeNativeOnly,
 								maximumResults: 1)
 			let records = try query.resultsAllowingPartial(false) as! [ODRecord]
-			print(records.first?.recordName ?? "noUserFound")
+            stUsers.append(records.first?.recordName ?? "noUserFound")
 		}
 	} catch {
-		print("No User Found")
+        stUsers.append("No User Found")
 	}
 }
+
+print("<result>\(stUsers.joined(separator: "\n"))</result>")
